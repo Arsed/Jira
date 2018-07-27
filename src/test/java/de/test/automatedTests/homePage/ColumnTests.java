@@ -26,7 +26,7 @@ public class ColumnTests extends AbstractAcceptanceTest {
         WebElement noLimitColumn = getWebDriver().findElement(By.cssSelector(SECOND_COLUMN));
         Assert.assertEquals(noLimitColumn.getAttribute("max"), noLimitColumn.getAttribute("id"), "The value of the max attribute need to be the same with id");
 
-        //verify "No limit " message and close column button
+        //verify "No limit" message and close column button
         Assert.assertEquals(noLimitColumn.getText(), "X\nNo limit");
     }
 
