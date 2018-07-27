@@ -1,7 +1,6 @@
 package de.test.automatedTests.homePage;
 
 import com.sdl.selenium.web.WebLocator;
-import com.sdl.selenium.web.utils.Utils;
 import de.test.automatedTests.config.AbstractAcceptanceTest;
 import de.test.automatedTests.managers.ApplicationManager;
 import de.test.automatedTests.utils.MouseUtils;
@@ -12,11 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.awt.*;
 import java.util.List;
 
-import static de.test.automatedTests.managers.ColumnsManager.MAIN_COLUMN_SELECTOR;
-import static de.test.automatedTests.managers.ColumnsManager.SECOND_COLUMN;
+import static de.test.automatedTests.managers.ColumnsManager.*;
 import static de.test.automatedTests.managers.IssueManager.*;
 
 public class IssueTest extends AbstractAcceptanceTest {
@@ -150,38 +147,5 @@ public class IssueTest extends AbstractAcceptanceTest {
         Assert.assertNotEquals(issueTitle, "3");
     }
 
-    @Test
-    public void verifyBackgroundAlert() throws AWTException {
-        for (int i = 0; i < 10; i++) {
-            IssuesMananger.createIssue("test" + i, "test");
-        }
-        ColumnManager.addColumnActions(5,true);
-        WebElement secondColumn;
-        MouseUtils.dragAndDropIssues(MAIN_COLUMN_SELECTOR, SECOND_COLUMN, 0,5, getWebDriver());
-        secondColumn=getWebDriver().findElement(By.cssSelector(SECOND_COLUMN));
-        Assert.assertEquals(secondColumn.getCssValue("background-color"),"rgba(255, 96, 96, 1)");
-
-        List<WebElement> secondColumnIssues=secondColumn.findElements(By.cssSelector(".newDiv"));
-        int length=secondColumnIssues.size();
-        MouseUtils.dragAndDropIssues(MAIN_COLUMN_SELECTOR, SECOND_COLUMN, 0,2, getWebDriver());
-        secondColumnIssues=secondColumn.findElements(By.cssSelector(".newDiv"));
-        Assert.assertEquals(length,secondColumnIssues.size());
-
-    }
-
-    @Test
-    public void verifyMaxLimitOfIssues(){
-        for (int i = 0; i < 10; i++) {
-            IssuesMananger.createIssue("test" + i, "test");
-        }
-        ColumnManager.addColumnActions(2,true);
-        WebElement secondColumn=getWebDriver().findElement(By.cssSelector(SECOND_COLUMN));
-        List<WebElement> secondColumnIssues=secondColumn.findElements(By.cssSelector(".newDiv"));
-        MouseUtils.dragAndDropIssues(MAIN_COLUMN_SELECTOR, SECOND_COLUMN, 0,2, getWebDriver());
-        int length=secondColumnIssues.size();
-        MouseUtils.dragAndDropIssues(MAIN_COLUMN_SELECTOR, SECOND_COLUMN, 0,2, getWebDriver());
-        secondColumnIssues=secondColumn.findElements(By.cssSelector(".newDiv"));
-        Assert.assertEquals(length,secondColumnIssues.size());
-    }
 
 }

@@ -9,11 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static de.test.automatedTests.managers.ColumnsManager.SECOND_COLUMN;
 import static de.test.automatedTests.managers.ColumnsManager.SECOND_COLUMN_CLOSE_BUTTON;
-import static de.test.automatedTests.managers.IssueManager.LEFT_COLUMN_SELECTOR;
 
 public class ColumnTests extends AbstractAcceptanceTest {
 
@@ -50,13 +47,11 @@ public class ColumnTests extends AbstractAcceptanceTest {
         ColumnManager.addColumnActions(4, true);
         WebElement closeButton = getWebDriver().findElement(By.cssSelector(SECOND_COLUMN_CLOSE_BUTTON));
         //wait for new column to be visible
-        new WebDriverWait(getWebDriver(), ApplicationManager.WAIT_TIME_OUT_IN_SECONDS).until(ExpectedConditions.elementToBeClickable(closeButton));   //????????????????????????
+        new WebDriverWait(getWebDriver(), ApplicationManager.WAIT_TIME_OUT_IN_SECONDS).until(ExpectedConditions.elementToBeClickable(closeButton));
         //press the close button
         closeButton.click();
         //wait for the close button to be invisible
         new WebDriverWait(getWebDriver(), ApplicationManager.WAIT_TIME_OUT_IN_SECONDS).until(ExpectedConditions.invisibilityOf(closeButton));
 
     }
-
-
 }
